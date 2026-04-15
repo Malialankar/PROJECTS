@@ -19,10 +19,6 @@ select gender, sum(`purchase_amount_(usd)`) as revenue
 from customer
 group by gender;
 -- select `purchase_amount_(usd)` from customer;
--- -------- practice -------------------------------------------------
-select gender, sum(`purchase_amount_(usd)`) as revenue, discount_applied
-from customer
-group by gender, discount_applied;
 
 -- Q2. Which customers used a discount but still spent more than the average purchase amount?
 select * from customer limit 5;
@@ -31,15 +27,6 @@ from customer
 where 
 discount_applied = 'Yes' and 
 `purchase_amount_(usd)` >= (select avg(`purchase_amount_(usd)`) from customer);
--- ----------practice-----------------------------
-select customer_id, `purchase_amount_(usd)`
-from customer
-where discount_applied = 'Yes' and 
-`purchase_amount_(usd)` >= (select avg(`purchase_amount_(usd)`) from customer)
-limit 5;
-
-select avg(`purchase_amount_(usd)`) from customer;
-select customer_id from customer;
 
 -- Q3. Which are the top 5 products with the highest average review rating?
 select * from customer limit 5;
@@ -47,12 +34,6 @@ select item_purchased , round(avg(review_rating), 2) as avg_rating
 from customer
 group by item_purchased
 order by avg_rating DESC limit 5;
--- practice----------------------------------------
-select item_purchased, round(avg(review_rating),2) as avg_rating
-from customer
-group by item_purchased  
-order by avg_rating desc limit 5;
-
 
 -- Q4. Compare the average purchase amounts between Standard and Express Shipping.
 select * from customer limit 5;
